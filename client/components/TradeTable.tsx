@@ -20,8 +20,11 @@ export const TradeTable: React.FC<TradeTableProps> = ({ trades, title }) => {
     <div className="border border-slate-700 bg-slate-800/30 rounded-xl overflow-hidden">
       <div className="px-4 py-3 border-b border-slate-700 flex justify-between items-center bg-slate-800/50">
         <h3 className="font-semibold text-slate-200">{title}</h3>
-        <span className="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded-full">{trades.length} Open</span>
+        <span className="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded-full">
+          {trades.length} Open
+        </span>
       </div>
+
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left">
           <thead className="text-xs text-slate-400 uppercase bg-slate-800/80">
@@ -33,31 +36,54 @@ export const TradeTable: React.FC<TradeTableProps> = ({ trades, title }) => {
               <th className="px-4 py-3 text-right">Profit</th>
             </tr>
           </thead>
+
           <tbody className="divide-y divide-slate-700/50">
             {trades.map((trade) => (
               <tr key={trade.id} className="hover:bg-slate-700/20 transition-colors">
+                
+                {/* SYMBOL */}
                 <td className="px-4 py-3 font-medium text-slate-200">
-                  {trade.symbol}
-                  <div className="text-[10px] text-slate-500">#{trade.ticket}</div>
+                  {trade.symbol ?? "-"}
+                  <div className="text-[10px] text-slate-500">
+                    #{trade.ticket ?? "0"}
+                  </div>
                 </td>
+
+                {/* TYPE */}
                 <td className="px-4 py-3">
-                  <span className={`px-2 py-0.5 rounded text-xs font-bold ${
-                    trade.type === TradeType.BUY 
-                      ? 'bg-green-500/20 text-green-400' 
-                      : 'bg-red-500/20 text-red-400'
-                  }`}>
-                    {trade.type}
+                  <span
+                    className={`px-2 py-0.5 rounded text-xs font-bold ${
+                      trade.type === TradeType.BUY
+                        ? "bg-green-500/20 text-green-400"
+                        : "bg-red-500/20 text-red-400"
+                    }`}
+                  >
+                    {trade.type ?? "-"}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-slate-300">{trade.lots}</td>
+
+                {/* LOTS */}
+                <td className="px-4 py-3 text-slate-300">
+                  {trade.lots ?? 0}
+                </td>
+
+                {/* PRICE */}
                 <td className="px-4 py-3 text-right text-slate-300 font-mono">
-                  {trade.currentPrice.toFixed(5)}
+                  {(trade.currentPrice ?? 0).toFixed(5)}
                 </td>
-                <td className={`px-4 py-3 text-right font-mono font-medium ${
-                  trade.profit >= 0 ? 'text-green-400' : 'text-red-400'
-                }`}>
-                  {trade.profit > 0 ? '+' : ''}{trade.profit.toFixed(2)}
+
+                {/* PROFIT */}
+                <td
+                  className={`px-4 py-3 text-right font-mono font-medium ${
+                    (trade.profit ?? 0) >= 0
+                      ? "text-green-400"
+                      : "text-red-400"
+                  }`}
+                >
+                  {(trade.profit ?? 0) > 0 ? "+" : ""}
+                  {(trade.profit ?? 0).toFixed(2)}
                 </td>
+
               </tr>
             ))}
           </tbody>
