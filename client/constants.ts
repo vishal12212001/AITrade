@@ -1,5 +1,3 @@
-
-
 import { MTAccount, Platform, AccountRole, ConnectionStatus, CopierSettings, LotSizingMode } from './types';
 
 export const INITIAL_SETTINGS: CopierSettings = {
@@ -25,8 +23,9 @@ export const INITIAL_SETTINGS: CopierSettings = {
   managedPairs: ["EURUSD", "GBPUSD", "USDJPY", "XAUUSD", "US30"],
 
   // Connection / App Mode
-  appMode: 'SIMULATION',
-  apiUrl: 'http://localhost:3001/api', 
+  appMode: 'LIVE',                                          //  ⬅ FIXED
+  apiUrl: 'https://ai-trade-backend-3j8e.onrender.com/api',
+     //  ⬅ FIXED
   apiSecret: '',
 
   // AI Defaults
@@ -38,8 +37,8 @@ export const INITIAL_SETTINGS: CopierSettings = {
   aiTakeProfitPercent: 0.5,
   
   // Daily Limits Defaults
-  aiDailyProfitLimit: 2.0, // 2% Daily Target
-  aiDailyMaxLoss: 2.0      // 2% Max Loss
+  aiDailyProfitLimit: 2.0, 
+  aiDailyMaxLoss: 2.0
 };
 
 export const MOCK_BROKERS = [
@@ -60,12 +59,8 @@ export const AVAILABLE_SYMBOLS = [
 
 export const MARKET_DATA_CONFIG = {
   enabled: true,
-  // Public API endpoint for real-time data (Example: Binance for Crypto)
-  // In a real Forex app, you would use endpoints like AlphaVantage, Finnhub, or a paid Broker Feed.
   apiEndpoint: 'https://api.binance.com/api/v3/ticker/price', 
-  refreshRate: 5000, // Poll every 5 seconds
-  
-  // Map internal symbols to API symbols
+  refreshRate: 5000,
   symbolMapping: {
     "BTCUSD": "BTCUSDT",
     "ETHUSD": "ETHUSDT",
