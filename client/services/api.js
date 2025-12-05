@@ -1,6 +1,6 @@
 // client/services/api.js
 
-const API_BASE = "http://localhost:5000"; // Backend URL
+const API_BASE = "https://ai-trade-backend-3j8e.onrender.com"; // Correct Render Backend URL
 
 // Helper function to get JWT token
 function getToken() {
