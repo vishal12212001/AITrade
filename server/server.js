@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin.js";
 import aiRoutes from "./routes/aiRoutes.js";
-import accountRoutes from "./routes/accounts.js";   // ✔ NEW
+import accountRoutes from "./routes/accounts.js";
 
 dotenv.config();
 const app = express();
@@ -14,13 +14,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ---- ROUTES ----
-app.use("/auth", authRoutes);
-app.use("/ai", aiRoutes);
-
+// ---- API ROUTES ----
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
-app.use("/api/accounts", accountRoutes);    // ✔ REQUIRED FOR LIVE MODE
+app.use("/api/ai", aiRoutes);  
+app.use("/api/accounts", accountRoutes);
 
 // ---- DATABASE ----
 mongoose.connect(process.env.MONGO_URI)
